@@ -1,7 +1,7 @@
 const jwt= require("jsonwebtoken")
 
 
-module.exports=((req,res,next)=>{
+const protect=((req,res,next)=>{
     try{
         const token=req.headers.authorization?.split(" ")[1]
         if(!token){
@@ -16,3 +16,13 @@ module.exports=((req,res,next)=>{
         return res.status(500).json({"message":"Server error in middleware function"})
     }
 })
+
+
+const authorize=(req,res,next)=>{
+    if(req.user.role!="admin"){
+        return res.status(401).json({message:"Unauthorized"})
+    }
+    next()
+}
+
+module.exports={protect,authorize}

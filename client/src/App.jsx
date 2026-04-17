@@ -5,6 +5,8 @@ import Register from './components/Register'
 import Login from './components/Login'
 import Addproduct from './components/Addproduct'
 import Home from './components/Home'
+import ProtectedRoute from './components/ProtectedRoute'
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -13,8 +15,11 @@ export default function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
-        <Route path="/add-product" element={<Addproduct/>}/>
-
+        <Route path="/add-product" element={
+          <ProtectedRoute>
+            <Addproduct/>
+          </ProtectedRoute>
+        }/>
       </Routes>
     </BrowserRouter>
   )

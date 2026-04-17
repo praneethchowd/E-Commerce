@@ -13,6 +13,7 @@ export default function Login() {
                 if(res.status==200){
                     alert("Login successful")
                     localStorage.setItem("token",res.data.token)
+                    localStorage.setItem("role", res.data.user.role);
                     navigate("/")
                 }
             })
